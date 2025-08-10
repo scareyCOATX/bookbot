@@ -1,13 +1,17 @@
 from stats import count_characters, count_words, char_sorted
-
+import sys
 
 def main():
-    book_path = "books/frankenstein.txt"
-    text = get_book_text(book_path)
-    word_count = count_words(text)
-    char_count = count_characters(text)
-    char_dict = (char_sorted(char_count))
-    print(report(word_count, char_dict, book_path))
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    else:
+        book_path = sys.argv[1]
+        text = get_book_text(book_path)
+        word_count = count_words(text)
+        char_count = count_characters(text)
+        char_dict = (char_sorted(char_count))
+        print(report(word_count, char_dict, book_path))
 
 
 def get_book_text(book_path: str) -> str:
@@ -27,6 +31,8 @@ Found {word_count} total words
             print(f'{i["char"]}: {i["num"]}')
         else:
             pass
+
+    print("============= END ===============")
 
 
 if __name__ == "__main__":
